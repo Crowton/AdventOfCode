@@ -344,6 +344,8 @@ def go(slopeRight, slopeDown):
         pos = (pos + slopeRight) % width
     return count
 
+    # return sum(data[i][(3 * i // slopeDown) % width] == "#" for i in range(0, len(data), slopeDown))
+
 
 # Part 1
 print(go(3, 1))
