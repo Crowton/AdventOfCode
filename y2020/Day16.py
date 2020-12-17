@@ -1,24 +1,15 @@
 with open("Day16.in") as f:
+    fieldsData, myData, otherData = f.read().split("\n\n")
+
     types = []
     typesNames = []
-    data = f.readlines()
-    i = 0
-    while data[i] != "\n":
-        name, ranges = data[i].split(": ")
+    for field in fieldsData.split("\n"):
+        name, ranges = field.split(": ")
         typesNames.append(name)
-        rangeData = []
-        for r in ranges.split(" or "):
-            f, t = map(int, r.split("-"))
-            rangeData.append((f, t))
-        types.append(rangeData)
-        i += 1
-    i += 2
-    myTicket = list(map(int, data[i].split(",")))
-    i += 3
-    otherTickets = []
-    while i < len(data):
-        otherTickets.append(list(map(int, data[i].split(","))))
-        i += 1
+        types.append([tuple(map(int, r.split("-"))) for r in ranges.split(" or ")])
+
+    myTicket = list(map(int, myData.split("\n")[-1].split(",")))
+    otherTickets = [list(map(int, ticket.split(","))) for ticket in otherData.split("\n")[1:]]
 
 # Part 1
 invalidSum = 0
